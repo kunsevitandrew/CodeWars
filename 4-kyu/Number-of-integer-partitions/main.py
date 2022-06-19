@@ -1,26 +1,27 @@
 # Number of integer partitions
 
-def task(result, lst, n):
-    last_lst = lst
-    while 1 in last_lst:
-        ind = lst.index(1)
-        lst[ind] -= 1
-        for i in range(n - 1, ind, -1):
-            lst[i] += 1
-            sort_lst = tuple(lst)
-            if sort_lst not in result:
-                result.add(sort_lst)
-                result |= task(result, sorted(lst), n)
-            lst[i] -= 1
+def task(lst, dct_of_indexes, n, index=0) -> int:
+    while lst[index] != 1:
+        print(lst)
+        if dct_of_indexes[lst[index]] == 0:
+            del dct_of_indexes
+        lst[index] -= 1
 
-    return result
+        for i in dct_of_indexes:
+            lst[dct_of_indexes[i]]+=1
+            # if dct_of_indexes[]
+            # task()
 
 
 def partitions(n):
     """define a function which returns the number of integer partitions of n"""
-    res = task(set(), [1] * n, n)
-    return len(res) + 1
+    lst = [n] + [0] * (n - 1)
+    dct_of_indexes = {5: 0, 0: 4}
+
+    count = task(lst, dct_of_indexes, n)
+    return count
 
 
+# test
 res = partitions(5)
 print(res)

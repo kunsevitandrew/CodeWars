@@ -13,6 +13,7 @@ def generation_humming(n):
         if len(lst) >= n:
             break
 
+
     return sorted(lst)
 
 lst = generation_humming(1000)
